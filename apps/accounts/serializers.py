@@ -5,6 +5,12 @@ from rest_framework_simplejwt import serializers as jwt_s
 from apps.accounts.models import Account
 
 
+class AccountAdminSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'
+
+
 class AccountLoginSerializers(jwt_s.TokenObtainPairSerializer):
     pass
 

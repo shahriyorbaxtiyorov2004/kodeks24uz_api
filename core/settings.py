@@ -58,7 +58,7 @@ INSTALLED_APPS = [
 
     # System Apps
     'apps.accounts',
-    # 'apps.products',
+    'apps.products',
     # 'apps.orders',
 
 ]

@@ -1,14 +1,14 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
 from rest_framework_simplejwt import views
 
 from . import serializers
 from .models import Account
 
 
-class AccountListView(generics.ListAPIView):
-    queryset = Account.objects.all()
-    serializer_class = serializers.AccountModelSerializer
-    permission_classes = [permissions.IsAdminUser]
+class AccountAdminViewSet(viewsets.ModelViewSet):
+    queryset = Account.objects.all().order_by('-date_joined')
+    serializer_class = serializers.AccountAdminSerializer
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
 
 class AccountLoginView(views.TokenObtainPairView):
