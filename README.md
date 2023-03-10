@@ -1,1 +1,1 @@
-# kodeks24uz_api
+# kodeks24.uz project

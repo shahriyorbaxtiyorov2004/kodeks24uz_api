@@ -5,6 +5,12 @@ from . import serializers
 from .models import Account
 
 
+class AccountListView(generics.ListAPIView):
+    queryset = Account.objects.all()
+    serializer_class = serializers.AccountModelSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+
 class AccountLoginView(views.TokenObtainPairView):
     serializer_class = serializers.AccountLoginSerializers
     permission_classes = [permissions.AllowAny]
@@ -12,7 +18,6 @@ class AccountLoginView(views.TokenObtainPairView):
 
 class AccountLoginRefreshView(views.TokenRefreshView):
     serializer_class = serializers.AccountLoginRefreshSerializers
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class AccountLogoutView(views.TokenBlacklistView):
@@ -22,13 +27,13 @@ class AccountLogoutView(views.TokenBlacklistView):
 
 class AccountRegisterView(generics.CreateAPIView):
     queryset = Account.objects.all()
-    serializer_class = serializers.AccountSerializer
+    serializer_class = serializers.AccountModelSerializer
     permission_classes = [permissions.AllowAny]
 
 
 class AccountView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()
-    serializer_class = serializers.AccountSerializer
+    serializer_class = serializers.AccountModelSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
