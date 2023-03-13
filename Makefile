@@ -17,3 +17,22 @@ static:
 freeze:
 	pip freeze >requirements.txt
 
+# for linux
+admin3:
+	./manage.py createsuperuser
+
+app3:
+	./manage.py startapp app
+
+migrate3:
+	./manage.py makemigrations
+	./manage.py migrate
+
+run3:
+	./manage.py runserver
+
+static3:
+	./manage.py collectstatic
+
+freeze3:
+	pip freeze >requirements.txt

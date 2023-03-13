@@ -1,20 +1,18 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
 
-from apps.accounts import views
-from apps.accounts.views import AccountAdminViewSet
+from apps.accounts.views import accounts, auth, admin
 
 router = DefaultRouter()
-router.register('', AccountAdminViewSet)
+router.register('', admin.AccountAdminViewSet)
 
 urlpatterns = [
-    path('profile-login/', TokenObtainPairView.as_view(), name='login'),
-    path('profile-login/refresh/', TokenRefreshView.as_view(), name='login-refresh'),
-    path('profile-register/', views.AccountRegisterView.as_view(), name='register'),
-    path('profile-logout/', TokenBlacklistView.as_view(), name='logout'),
+    path('profile-login/', auth.AccountLoginView.as_view(), name='login'),
+    path('profile-login/refresh/', auth.AccountLoginRefreshView.as_view(), name='login-refresh'),
+    path('profile-register/', auth.AccountRegisterView.as_view(), name='register'),
+    path('profile-logout/', auth.AccountLogoutView.as_view(), name='logout'),
 
-    path('my-profile/', views.AccountView.as_view(), name='profile-detail'),
+    path('profile/', accounts.AccountView.as_view(), name='profile-detail'),
 
-    path('profiles/', include(router.urls), name='profiles'),
+    path('admin-view-profiles/', include(router.urls), name='admin-view-profiles'),
 ]

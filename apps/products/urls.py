@@ -1,24 +1,18 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 
-from . import views
-
-router = DefaultRouter()
-router.register(r'book-format', views.BookFormatViewSet)
+from apps.products.views import admin
+from apps.products.views import category
+from apps.products.views import product
 
 urlpatterns = [
-    path('books/all', views.BookListView.as_view(), name='book-list'),
-    path('books/create/', views.BookCreateView.as_view(), name='book-create'),
-    path('books/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
-    path('books/<int:pk>/update/', views.BookUpdateView.as_view(), name='book-update'),
-    path('books/<int:pk>/delete/', views.BookDeleteView.as_view(), name='book-delete'),
+    path('books/all', product.BookListView.as_view(), name='book-list'),
+    path('books/<int:pk>/', product.BookDetailView.as_view(), name='book-detail'),
 
-    path('categories/all', views.CategoryListView.as_view(), name='book-list'),
+    path('categories/all', category.CategoryListView.as_view(), name='book-list'),
 
-    # path('categories/create/', views.CategoryCreateView.as_view(), name='book-create'),
-    # path('categories/<int:pk>/', views.CategoryDetailView.as_view(), name='book-detail'),
-    # path('categories/<int:pk>/update/', views.CategoryUpdateView.as_view(), name='book-update'),
-    # path('categories/<int:pk>/delete/', views.CategoryDeleteView.as_view(), name='book-delete'),
-
-    # path('', include(router.urls)),
+    # admin
+    path('admin-books/create/', admin.BookCreateView.as_view(), name='book-create'),
+    path('admin-books/<int:pk>/', admin.BookAdminView.as_view(), name='book-update'),
+    path('admin-categories/create/', admin.CategoryCreateView.as_view(), name='book-create'),
+    path('admin-categories/<int:pk>/', admin.CategoryAdminView.as_view(), name='book-update'),
 ]

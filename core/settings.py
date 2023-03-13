@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     # System Apps
     'apps.accounts',
     'apps.products',
-    # 'apps.orders',
+    # 'orders',
 
 ]
 
@@ -168,7 +168,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
 }
 
 SWAGGER_SETTINGS = {
